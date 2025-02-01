@@ -1,11 +1,21 @@
 from fastapi import FastAPI
 import uvicorn
 
+from core.services import Reactome
+
 app = FastAPI()
 
 @app.get("/")
 def root():
     return {"message": "Hello World"}
+
+
+@app.get("/reactome-stable-id/{db_id}", tags=["Reactome"])
+def reactome_stable_id(db_id: str):
+    """
+    Look up and return the stable id of a given database id in the Reactome database
+    """
+    return Reactome.stable_id(db_id)
 
 
 if __name__ == "__main__":

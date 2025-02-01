@@ -1,6 +1,7 @@
 fastapi
 pylint
 redis
+requests
 types-redis
 uvicorn
 
