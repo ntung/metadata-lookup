@@ -1,4 +1,5 @@
 fastapi
+pylint
 redis
 types-redis
 uvicorn
