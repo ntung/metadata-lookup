@@ -3,5 +3,7 @@ pylint
 redis
 requests
 types-redis
+ChemSpiPy
+sgd-rest
 uvicorn
 
