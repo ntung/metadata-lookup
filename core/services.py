@@ -1,3 +1,4 @@
+import json
 import os
 
 import chemspipy
@@ -67,3 +68,26 @@ class CHS:
         except Exception as e:
             print(e)
             return ""
+
+class HGNC:
+    # https://storage.googleapis.com / public - download - files / hgnc / json / json / hgnc_complete_set.json
+    def __init__(self):
+
+        pass
+
+    @staticmethod
+    def load_data():
+        """
+        Loads all data
+        """
+        with open("imported/hgnc_complete_set.json", "+r", encoding="utf-8") as _file:
+            jdata = json.load(_file)
+            jdata = jdata["response"]["docs"]
+        ddict = {}
+        for item in jdata:
+            ddict[item["hgnc_id"]] = item["name"]
+        return ddict
+
+    def look_up(_id: str) -> str:
+        ddict = HGNC.load_data()
+        return ddict[_id]

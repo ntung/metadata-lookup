@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from core.services import Reactome, SGD, CHS
+from core.services import Reactome, SGD, CHS, HGNC
 
 app = FastAPI()
 
@@ -32,6 +32,13 @@ def lookup_chemspider_name_via_id(_id: str):
     """
     return CHS.look_up_name(_id)
 
+
+@app.get("/hgnc/{_id}", tags=["HGNC"])
+def lookup_hgnc(_id: str):
+    """
+    Look up the name of a given id
+    """
+    return HGNC.look_up(_id)
 
 
 if __name__ == "__main__":
