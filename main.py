@@ -11,26 +11,27 @@ def root():
 
 
 @app.get("/reactome-stable-id/{db_id}", tags=["Reactome"])
-def lookup_reactome_stable_id_via_DB_id(db_id: str):
+def lookup_reactome_stable_id_via_db_id(db_id: str):
     """
     Look up and return the stable id of a given database id in the Reactome database
     """
     return Reactome.stable_id(db_id)
 
 @app.get("/sgd-locus-id/{locus_id}", tags=["SGD"])
-def lookup_SGD_via_locus_id(locus_id: str):
+def lookup_sgd_via_locus_id(locus_id: str):
     """
     Look up and return the stable id of a given database id in SGD
     """
     return SGD.look_up_locus(locus_id)
 
 
-@app.get("/chemspider/{id}", tags=["ChemSpider"])
-def lookup_ChemSpider_name_via_id(id):
+@app.get("/chemspider/{_id}", tags=["ChemSpider"])
+def lookup_chemspider_name_via_id(_id: str):
     """
     Look up the name of a given id
     """
-    return CHS.look_up_name(id)
+    return CHS.look_up_name(_id)
+
 
 
 if __name__ == "__main__":

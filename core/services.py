@@ -1,4 +1,6 @@
 import os
+
+import chemspipy
 import requests
 import sgd
 from chemspipy import ChemSpider
@@ -11,12 +13,12 @@ class Reactome:
         """
         pass
 
-    def stable_id(_dbid):
+    def stable_id(_db_id: str) -> str:
         """
         Retrieve the stable identifier of a given database identifier from
         the Reactome database.
         """
-        _url = f"https://reactome.org/ContentService/data/query/{_dbid}/stId"
+        _url = f"https://reactome.org/ContentService/data/query/{_db_id}/stId"
         res = requests.get(_url)
         stable_id = ""
         if res.status_code == 200:
@@ -31,11 +33,11 @@ class SGD:
         """
         pass
 
-    def look_up_locus(locus_id):
+    def look_up_locus(_id: str) -> str:
         """
         Look up a given locus id
         """
-        _locus = sgd.locus(locus_id)
+        _locus = sgd.locus(_id)
         _json = _locus.details.json()
         return _json
     
@@ -51,9 +53,17 @@ class CHS:
         pass
         
 
-    def look_up_name(id):
+    def look_up_name(_id: str) -> str:
         CHEMSPIDER_API_KEY = os.environ['CHEMSPIDER_API_KEY']
         cs = ChemSpider(CHEMSPIDER_API_KEY)
-        comp = cs.get_compound(id)  # Specify compound by ChemSpider ID
-        return comp.common_name
-    
+
+        try:
+            comp = cs.get_compound(_id)  # Specify compound by ChemSpider ID
+            try:
+                return comp.common_name
+            except Exception as e:
+                print(e)
+                return ""
+        except Exception as e:
+            print(e)
+            return ""
