@@ -90,4 +90,5 @@ class HGNC:
 
     def look_up(_id: str) -> str:
         ddict = HGNC.load_data()
-        return ddict[_id]
+        name = ddict[_id]
+        return name
